@@ -1,0 +1,2176 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Symfony - Setup & Configuration</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🎵 Guide Symfony</h1>
+            </div>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+                    <span class="theme-icon sun-icon">🌞</span>
+                    <span class="theme-icon moon-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <aside class="sidebar">
+        <nav class="table-of-contents">
+            <h3>Table des matières</h3>
+            
+            <div class="file-section">
+                <h4>Setup & Configuration</h4>
+                <ul>
+                    <li><a href="#etape1">Étape 1: Nouveau projet</a></li>
+                    <li><a href="#etape2">Étape 2: Le serveur</a></li>
+                    <li><a href="#etape3">Étape 3: Bootstrap et UiKit</a></li>
+                </ul>
+            </div>
+            
+            <div class="file-section">
+                <h4>Développement de base</h4>
+                <ul>
+                    <li><a href="#etape4">Étape 4: Création d'un controller</a></li>
+                    <li><a href="#etape5">Étape 5: Entité, BDD et Doctrine</a></li>
+                    <li><a href="#etape6">Étape 6: Les fixtures</a></li>
+                    <li><a href="#etape7">Étape 7: Les fakers</a></li>
+                </ul>
+            </div>
+            
+            <div class="file-section">
+                <h4>Gestion des données</h4>
+                <ul>
+                    <li><a href="#etape8">Étape 8: Les repository</a></li>
+                    <li><a href="#etape9">Étape 9: Requêtes personnalisées</a></li>
+                </ul>
+            </div>
+            
+            <div class="file-section">
+                <h4>Formulaires</h4>
+                <ul>
+                    <li><a href="#etape10">Étape 10: Résumé des formulaires</a></li>
+                    <li><a href="#etape11">Étape 11: Création de formulaire</a></li>
+                    <li><a href="#etape12">Étape 12: Affichage et rendu</a></li>
+                    <li><a href="#etape13">Étape 13: Traitement des données</a></li>
+                    <li><a href="#etape14">Étape 14: Validation & messages</a></li>
+                </ul>
+            </div>
+            
+            <div class="file-section">
+                <h4>Relations entre entités</h4>
+                <ul>
+                    <li><a href="#etape15">Étape 15: Introduction aux relations</a></li>
+                    <li><a href="#etape16">Étape 16: Créer l'entité à lier</a></li>
+                    <li><a href="#etape17">Étape 17: Configuration des relations</a></li>
+                    <li><a href="#etape18">Étape 18: Utilisation des relations</a></li>
+                </ul>
+            </div>
+            
+            <div class="file-section">
+                <h4>Sécurité</h4>
+                <ul>
+                    <li><a href="#etape19">Étape 19: Introduction à la sécurité</a></li>
+                    <li><a href="#etape20">Étape 20: L'entité utilisateur</a></li>
+                    <li><a href="#etape21">Étape 21: Système d'authentification</a></li>
+                    <li><a href="#etape22">Étape 22: Formulaire d'inscription</a></li>
+                    <li><a href="#etape23">Étape 23: Fonctionnalités bonus</a></li>
+                </ul>
+            </div>
+            
+            <div class="file-section">
+                <h4>Services & API</h4>
+                <ul>
+                    <li><a href="#etape24">Étape 24: Objectifs des services</a></li>
+                    <li><a href="#etape25">Étape 25: Créer un service</a></li>
+                    <li><a href="#etape26">Étape 26: Créer une API</a></li>
+                    <li><a href="#etape27">Étape 27: Logs et logging</a></li>
+                    <li><a href="#etape28">Étape 28: Tests unitaires</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <h1>Setup, Développement, Données, Formulaires, Relations, Sécurité & Services</h1>
+            <p class="subtitle">Guide complet pour configurer et développer avec Symfony</p>
+        </header>
+
+        <section id="etape1" class="section">
+            <div class="section-header">
+                <span class="step-number">1</span>
+                <h2>Nouveau projet</h2>
+            </div>
+            
+            <div class="card">
+                <h3>📥 Téléchargement de Symfony CLI</h3>
+                <p>Téléchargez Symfony CLI depuis le site officiel :</p>
+                <div class="url-box download-link">
+                    <span class="download-icon">📥</span>
+                    <a href="https://symfony.com/download" target="_blank" rel="noopener">
+                        https://symfony.com/download
+                    </a>
+                </div>
+                <div class="note">
+                    <strong>💡 Note :</strong> Copiez le fichier <code>symfony-cli.exe</code> dans le répertoire <code>Wamp/bin/php/PHPversion/</code> ou votre répertoire PHP.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🚀 Création du projet</h3>
+                <p>Pour créer un nouveau répertoire de projet :</p>
+                <pre><span class="code-label terminal">Terminal</span><code class="language-bash">symfony new nomProjet --version="6.4.*" --webapp</code></pre>
+                
+                <p>Si le répertoire existe déjà et que vous êtes positionné dedans :</p>
+                <pre><span class="code-label terminal">Terminal</span><code class="language-bash">symfony new . --version="6.4.*" --webapp</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Configuration MySQL</h3>
+                <p>Si nécessaire, modifiez le fichier <code>php.ini</code> pour activer l'extension MySQL :</p>
+                <pre><span class="code-label config">Configuration</span><code class="language-ini">extension=pdo_mysql</code></pre>
+                <div class="note warning">
+                    <strong>⚠️ Attention :</strong> N'oubliez pas de redémarrer votre serveur web après cette modification.
+                </div>
+            </div>
+        </section>
+
+        <section id="etape2" class="section">
+            <div class="section-header">
+                <span class="step-number">2</span>
+                <h2>Le serveur</h2>
+            </div>
+
+            <div class="card">
+                <h3>🏃‍♂️ Lancement du serveur</h3>
+                <p>Pour démarrer le serveur de développement :</p>
+                <pre><span class="code-label terminal">Terminal</span><code class="language-bash">symfony serve</code></pre>
+                
+                <div class="success-box">
+                    <p>🎉 Votre site sera accessible sur :</p>
+                    <div class="url-box">
+                        <span class="link-icon">🔗</span>
+                        <a href="http://localhost:8000" target="_blank" rel="noopener">
+                            http://localhost:8000
+                        </a>
+                    </div>
+                    <small>Vous pouvez changer le port si nécessaire</small>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🌐 Configuration Apache (optionnel)</h3>
+                <p>Si vous utilisez Apache, installez le pack Apache pour la liaison via <code>.htaccess</code> :</p>
+                <pre><span class="code-label terminal">Terminal</span><code class="language-bash">symfony composer req symfony/apache-pack</code></pre>
+                <div class="note">
+                    <strong>💡 Répondez "oui" :</strong> lors de l'installation
+                </div>
+
+                <h4>Routes disponibles :</h4>
+                <div class="routes-container">
+                    <div class="route-item">
+                        <strong>En natif (fonctionnement de base) :</strong>
+                        <div class="success-box">
+                            <p>🌐 Route accessible sur :</p>
+                            <div class="url-box">
+                                <span class="link-icon">🔗</span>
+                                <a href="http://localhost:8000/route" target="_blank" rel="noopener">
+                                    http://localhost:8000/route
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <strong>Avec Apache (grâce au .htaccess) :</strong>
+                        <div class="success-box">
+                            <p>🌐 Route accessible sur :</p>
+                            <div class="url-box">
+                                <span class="link-icon">🔗</span>
+                                <a href="http://localhost:8000/demo/public/test" target="_blank" rel="noopener">
+                                    http://localhost:8000/demo/public/test
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="etape3" class="section">
+            <div class="section-header">
+                <span class="step-number">3</span>
+                <h2>Bootstrap et UiKit</h2>
+            </div>
+
+            <div class="card">
+                <h3>🅱️ Configuration Bootstrap</h3>
+                <p>Ajoutez Bootstrap en tant qu'asset :</p>
+                <pre><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console importmap:require bootstrap</code></pre>
+                
+                <p>Puis ajoutez dans votre fichier <code>app.js</code> :</p>
+                <pre><span class="code-label javascript">JavaScript</span><code class="language-javascript">import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Configuration UiKit</h3>
+                
+                <div class="step-item">
+                    <h4>1. Téléchargement</h4>
+                    <p>Téléchargez le framework depuis :</p>
+                    <div class="url-box download-link">
+                        <span class="download-icon">📥</span>
+                        <a href="https://getuikit.com/download" target="_blank" rel="noopener">
+                            https://getuikit.com/download
+                        </a>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <h4>2. Installation</h4>
+                    <p>Dézippez le fichier dans votre projet :</p>
+                    <pre><span class="code-label config">Structure</span><code class="language-bash">assets/vendor/uikit</code></pre>
+                    <div class="note">
+                        <strong>📁 Structure :</strong> Ce répertoire contient un dossier <code>css</code> et un dossier <code>js</code>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <h4>3. Intégration CSS</h4>
+                    <p>Ajoutez dans <code>base.html.twig</code> le lien vers les CSS :</p>
+                    <pre><span class="code-label twig">Twig</span><code class="language-twig">&lt;link rel="stylesheet" href="{{ asset('vendor/uikit/css/uikit.min.css') }}"&gt;</code></pre>
+                </div>
+
+                <div class="step-item">
+                    <h4>4. Intégration JavaScript</h4>
+                    <p>Ajoutez les scripts JS de UiKit :</p>
+                    <pre><span class="code-label twig">Twig</span><code class="language-twig">&lt;script src="{{ asset('vendor/uikit/js/uikit.js') }}"&gt;&lt;/script&gt;
+&lt;script src="{{ asset('vendor/uikit/js/uikit-icons.js') }}"&gt;&lt;/script&gt;</code></pre>
+                </div>
+
+                <div class="step-item">
+                    <h4>5. Exemple de base.html.twig</h4>
+                    <pre><span class="code-label twig">Twig</span><code class="language-twig">&lt;head&gt;	
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;{% block title %}Demo{% endblock %}&lt;/title&gt;
+    &lt;link rel="icon" href="{{ asset('img/icon.png')}}"&gt;
+    &lt;link rel="stylesheet" href="{{ asset('vendor/uikit/css/uikit.min.css') }}"&gt;
+
+    {% block stylesheets %}{% endblock %}
+
+    {#  UIKIT JS #}	
+    &lt;script src="{{ asset('vendor/uikit/js/uikit.js') }}"&gt;&lt;/script&gt;
+    &lt;script src="{{ asset('vendor/uikit/js/uikit-icons.js') }}"&gt;&lt;/script&gt;
+    {#  ./UIKIT JS #}
+
+    {% block javascripts %}	
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+&lt;/head&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="etape4" class="section">
+            <div class="section-header">
+                <span class="step-number">4</span>
+                <h2>Création d'un controller</h2>
+            </div>
+
+            <div class="card">
+                <h3>🎮 Génération de controller en CLI</h3>
+                <p>Pour créer un controller nommé "NomController" :</p>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:controller Nom</code></pre>
+                <div class="note">
+                    <strong>💡 Note :</strong> Symfony générera automatiquement le fichier controller et sa vue correspondante.
+                </div>
+            </div>
+        </section>
+
+        <section id="etape5" class="section">
+            <div class="section-header">
+                <span class="step-number">5</span>
+                <h2>Entité, BDD et Doctrine</h2>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Configuration de l'accès à la BDD</h3>
+                <p>Configurez l'accès à la base de données :</p>
+                <div class="step-item">
+                    <h4>1. Création du fichier de configuration</h4>
+                    <p>Faites une copie du fichier <code>.env</code> en <code>.env.local</code></p>
+                    <p>Dans le <code>.env.local</code>, cherchez <code>DATABASE_URL</code> et modifiez :</p>
+                    <pre class="config"><span class="code-label config">Configuration</span><code class="language-ini">DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8.0.32&charset=utf8mb4"</code></pre>
+                    <div class="note">
+                        <strong>📝 Explication :</strong>
+                        <ul>
+                            <li>Le 1er "app" correspond au nom d'utilisateur de la BDD</li>
+                            <li>"!ChangeMe!" correspond au mot de passe</li>
+                            <li>Le 2ème "app" correspond au nom de la base</li>
+                            <li>Bien renseigner la version de votre serveur SQL</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <h4>2. Création de la base de données</h4>
+                    <p>Créez une base par rapport à la ligne DATABASE_URL de <code>.env.local</code> :</p>
+                    <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console doctrine:database:create</code></pre>
+                    <p>Ou en version raccourcie :</p>
+                    <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console d:d:c</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🏗️ Création des entités</h3>
+                <div class="step-item">
+                    <h4>1. Génération d'une entité</h4>
+                    <p>Créez les entités :</p>
+                    <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:entity Nom</code></pre>
+                    <div class="note">
+                        <strong>💡 Instructions :</strong> Cliquez sur "non", puis définissez les attributs et leur type. Vérifiez les fichiers créés avant la migration.
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <h4>2. Création du fichier de migration</h4>
+                    <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:migration</code></pre>
+                </div>
+
+                <div class="step-item">
+                    <h4>3. Migration vers la base</h4>
+                    <p>Copiez les entités dans la base (première fois) :</p>
+                    <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console doctrine:migration:migrate</code></pre>
+                    <p>Ou en version raccourcie :</p>
+                    <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console d:m:m</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>✏️ Modification d'une entité</h3>
+                <p>Vous pouvez modifier une entité existante :</p>
+                <div class="step-item">
+                    <h4>1. Ajout d'options sur un attribut</h4>
+                    <pre class="twig"><span class="code-label twig">PHP</span><code class="language-php">(options: ['default' => false])</code></pre>
+                </div>
+
+                <div class="step-item">
+                    <h4>2. Création du constructeur</h4>
+                    <pre class="twig"><span class="code-label twig">PHP</span><code class="language-php">public function __construct()
+{
+    $this->published = false;
+}</code></pre>
+                </div>
+
+                <div class="step-item">
+                    <h4>3. Nouvelle migration</h4>
+                    <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:migration</code></pre>
+                    <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console doctrine:migration:migrate</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💾 Utilisation dans le controller</h3>
+                <div class="step-item">
+                    <h4>1. Création d'une instance et peuplement</h4>
+                    <pre class="twig"><span class="code-label twig">PHP</span><code class="language-php">$course = new Course();
+$course->setName("Symfony");
+$course->setPublished(true);
+$course->setContent("Le développement Web côté serveur avec Symfony");
+$course->setDuration(10);
+$course->setDateCreated(new \DateTimeImmutable("now"));</code></pre>
+                </div>
+
+                <div class="step-item">
+                    <h4>2. Injection de dépendance</h4>
+                    <p>Ajoutez en paramètre de méthode :</p>
+                    <pre class="twig"><span class="code-label twig">PHP</span><code class="language-php">EntityManagerInterface $em</code></pre>
+                </div>
+
+                <div class="step-item">
+                    <h4>3. Persistance et flush</h4>
+                    <p>Ajoutez avant le return :</p>
+                    <pre class="twig"><span class="code-label twig">PHP</span><code class="language-php">$em->persist($course);
+$em->flush();</code></pre>
+                </div>
+
+                <div class="step-item">
+                    <h4>4. Exemple de méthode complète</h4>
+                    <pre class="twig"><span class="code-label twig">PHP</span><code class="language-php">#[Route('/demo', name: 'demo', methods: ['GET'])]
+public function demo(EntityManagerInterface $em): Response
+{
+    $course = new Course();
+    $course->setName("Symfony");
+    $course->setPublished(true);
+    $course->setContent("Le développement Web côté serveur avec Symfony");
+    $course->setDuration(10);
+    $course->setDateCreated(new \DateTimeImmutable("now"));
+
+    $em->persist($course);
+    $em->flush();
+
+    return $this->render('course/list.html.twig');
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="etape6" class="section">
+            <div class="section-header">
+                <span class="step-number">6</span>
+                <h2>Les fixtures (jeu de données de test)</h2>
+            </div>
+
+            <div class="card">
+                <h3>📦 Installation du composant</h3>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony composer req orm-fixtures</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>⚙️ Configuration des fixtures</h3>
+                <p>Dans <code>src/DataFixtures/AppFixtures</code>, renommez la classe et le nom de fichier (ex: "CourseFixtures")</p>
+                <p>Créez des fausses données :</p>
+                <pre class="twig"><span class="code-label twig">PHP</span><code class="language-php">class CourseFixtures extends Fixture
+{
+    public function load(ObjectManager $manager): void
+    {
+        $course = new Course();
+        $course->setName("Symfony");
+        $course->setPublished(true);
+        $course->setDateCreated(new \DateTimeImmutable());
+        $course->setContent("Le dev côté serveur avec Symfony");
+        $course->setDuration(10);
+
+        $manager->persist($course); // pour insérer
+
+        $course = new Course();
+        $course->setName("PHP");
+        $course->setPublished(true);
+        $course->setDateCreated(new \DateTimeImmutable());
+        $course->setContent("Le dev côté serveur en PHP");
+        $course->setDuration(10);
+
+        $manager->persist($course); // pour insérer
+
+        for ($i=0; $i < 30; $i++) {
+            $course = new Course();
+            $course->setName("Course $i");
+            $course->setPublished(true);
+            $course->setDateCreated(new \DateTimeImmutable());
+            $course->setContent("Contenu du course $i");
+            $course->setDuration(10);
+
+            $manager->persist($course); // pour insérer
+        }
+
+        $manager->flush(); // pour commit sur la BDD
+    }
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🚀 Exécution des fixtures</h3>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console doctrine:fixtures:load</code></pre>
+                <div class="note warning">
+                    <strong>⚠️ Attention :</strong> Cela remplace les données de la base !
+                </div>
+            </div>
+        </section>
+
+        <section id="etape7" class="section">
+            <div class="section-header">
+                <span class="step-number">7</span>
+                <h2>Les fakers (génération automatique de fausses données)</h2>
+            </div>
+
+            <div class="card">
+                <h3>📦 Installation du composant</h3>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony composer req fakerphp/faker</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎲 Utilisation dans les fixtures</h3>
+                <p>Ajoutez dans le fichier fixtures, avant le flush, une génération de données fictives :</p>
+                <pre class="twig"><span class="code-label twig">PHP</span><code class="language-php">$faker = \Faker\Factory::create('fr_FR');
+for ($i = 0; $i < 30; $i++) {
+    $course = new Course();
+    $course->setName($faker->word());
+    $course->setPublished($faker->boolean());
+    $date = $faker->dateTimeBetween('-30 days', '-1 days');
+    $course->setDateCreated(\DateTimeImmutable::createFromMutable($date));
+    $course->setContent($faker->realText);
+    $course->setDuration($faker->numberBetween(1, 10));
+
+    $manager->persist($course); // pour insérer
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔄 Ré-exécution des fixtures</h3>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console doctrine:fixtures:load</code></pre>
+                <div class="note warning">
+                    <strong>⚠️ Attention :</strong> Cela remplace les données de la base !
+                </div>
+            </div>
+        </section>
+
+        <section id="etape8" class="section">
+            <div class="section-header">
+                <span class="step-number">8</span>
+                <h2>Les repository</h2>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Ajout du repository dans le contrôleur</h3>
+                <p>Ajouter dans le contrôleur en paramètre de méthode, par exemple la méthode "list" :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">CourseRepository $courseRepository</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔍 Récupération des données</h3>
+                <p>Chercher la requête dans la méthode :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">$courses = $courseRepository->findAll();</code></pre>
+                
+                <p>Renvoyer le tableau :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">return $this->render('course/list.html.twig', [
+    'courses' => $courses
+]);</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📝 Exemple complet - Méthode list</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/', name: 'list', methods: ['GET'])]
+public function list(CourseRepository $courseRepository): Response
+{
+    $courses = $courseRepository->findAll();
+    return $this->render('course/list.html.twig', [
+        'courses' => $courses
+    ]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Template Twig correspondant</h3>
+                <p>Modifier le fichier "list.html.twig" :</p>
+                <pre><span class="code-label">Twig</span><code class="language-twig">{% block body %}
+	&lt;h1&gt;Liste des cours&lt;/h1&gt;
+	
+	{#  Afficher la liste des cours #}
+	&lt;table&gt;
+		&lt;thead&gt;
+			&lt;th scope ="col"&gt;Titre&lt;/th&gt;
+			&lt;th scope ="col"&gt;Durée&lt;/th&gt;
+			&lt;th scope ="col"&gt;Date de création&lt;/th&gt;
+			&lt;th scope ="col"&gt;Publié&lt;/th&gt;
+			&lt;th scope ="col"&gt;Action&lt;/th&gt;
+		&lt;/thead&gt;
+		
+		&lt;tbody&gt;
+			{% for c in courses %}
+			&lt;tr&gt;
+				&lt;td&gt;{{ c.name }}&lt;/td&gt;
+				&lt;td&gt;{{ c.duration }}&lt;/td&gt;
+				&lt;td&gt;{{ c.dateCreated | date('d/m/Y')}}&lt;/td&gt;
+				&lt;td&gt;{{ c.published ? 'X' : ''}}&lt;/td&gt;
+				&lt;td&gt;
+					&lt;a href="{{ path('course_show', {'id': c.id}) }}"&gt;
+					Détail
+					&lt;/a&gt;
+				&lt;/td&gt;
+			&lt;/tr&gt;
+			{% endfor %}
+		&lt;/tbody&gt;
+	&lt;/table&gt;
+{% endblock %}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>👁️ Méthode show - Affichage détaillé</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/{id}', name: 'show', requirements: ['id'=>'\d+'], methods: ['GET'])]
+public function show(int $id, CourseRepository $courseRepository): Response
+{
+    $course = $courseRepository->find($id);
+    
+    return $this->render('course/show.html.twig', [
+        'course' => $course
+    ]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Template show.html.twig</h3>
+                <pre><span class="code-label">Twig</span><code class="language-twig">{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ course.name }}</h1>
+    {# Afficher les infos du cours #}
+    <p>{{ course.content }}</p>
+    <p>Durée : {{ course.duration }}</p>
+    <p>Date de création : {{ course.dateCreated |date('d/m/Y') }}</p>
+    <p>Publié : {{ course.published ? 'Oui' : 'Non' }}</p>
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | {{ course.name }}
+{% endblock %}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>⚠️ Gestion des erreurs</h3>
+                <p>Ajouter une exception si la donnée n'existe pas :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/{id}', name: 'show', requirements: ['id'=>'\d+'], methods: ['GET'])]
+public function show(int $id, CourseRepository $courseRepository): Response
+{
+    $course = $courseRepository->find($id);
+    
+    if(!$course){
+        throw $this->createNotFoundException('Le cours n\'existe pas');
+    }
+    
+    return $this->render('course/show.html.twig', [
+        'course' => $course
+    ]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🚀 Gestion automatique des exceptions</h3>
+                <p>Symfony gère automatiquement les exceptions en changeant les paramètres de méthode :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/{id}', name: 'show', requirements: ['id'=>'\d+'], methods: ['GET'])]
+public function show(Course $course, CourseRepository $courseRepository): Response
+{
+    return $this->render('course/show.html.twig', [
+        'course' => $course
+    ]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>� Filtrage avec findBy</h3>
+                <p>Exemple de la méthode "list" pour filtrer l'affichage (trier par ordre descendant, publiés, les 5 premiers) :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/', name: 'list', methods: ['GET'])]
+public function list(CourseRepository $courseRepository): Response
+{
+    $courses = $courseRepository->findBy(['published' => true], ['name' => 'DESC'], 5);
+    
+    return $this->render('course/list.html.twig', [
+        'courses' => $courses
+    ]);
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="etape9" class="section">
+            <div class="section-header">
+                <span class="step-number">9</span>
+                <h2>Requêtes personnalisées</h2>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Repository personnalisé</h3>
+                <p>Aller dans le repository pour faire des requêtes à la main, exemple "CourseRepository"</p>
+            </div>
+
+            <div class="card">
+                <h3>📝 Requête DQL</h3>
+                <p>En DQL, sous le constructeur :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function findByDuration(): array
+{
+    $entityManager = $this->getEntityManager();
+    $dql = "SELECT c FROM App\Entity\Course c 
+              WHERE c.duration > 2
+              ORDER BY c.dateCreated DESC";
+    $query = $entityManager->createQuery($dql);
+    
+    return $query->getResult();
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎮 Utilisation dans le contrôleur</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/', name: 'list', methods: ['GET'])]
+public function list(CourseRepository $courseRepository): Response
+{
+    $courses = $courseRepository->findByDuration();
+    
+    return $this->render('course/list.html.twig', [
+        'courses' => $courses
+    ]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Requête avec paramètres dynamiques</h3>
+                <p>Exemple pour mettre une durée dynamique :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function findByDuration(int $duration = 2): array
+{
+    $entityManager = $this->getEntityManager();
+    $dql = "SELECT c FROM App\Entity\Course c 
+            WHERE c.duration > :duration
+            ORDER BY c.dateCreated DESC";
+    $query = $entityManager->createQuery($dql);
+    $query->setParameter('duration', $duration);
+    $query->setMaxResults(5);
+    return $query->getResult();
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Utilisation avec paramètre</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/', name: 'list', methods: ['GET'])]
+public function list(CourseRepository $courseRepository): Response
+{
+    //$courses = $courseRepository->findAll();
+    //$courses = $courseRepository->findBy(['published' => true], ['name' => 'DESC'], 5);
+    $courses = $courseRepository->findByDuration(5);
+    
+    return $this->render('course/list.html.twig', [
+        'courses' => $courses
+    ]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>⚖️ Comparaison DQL vs Query Builder</h3>
+                
+                <h4>📝 DQL :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">$entityManager = $this->getEntityManager();
+$dql = "SELECT c FROM App\Entity\Course c 
+        WHERE c.duration > :duration
+        ORDER BY c.dateCreated DESC";
+$query = $entityManager->createQuery($dql);
+$query->setParameter('duration', $duration);
+$query->setMaxResults(5);
+return $query->getResult();</code></pre>
+
+                <h4>🔧 Query Builder :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">$queryBuilder = $this->createQueryBuilder('c');
+$queryBuilder->andWhere('c.duration > :duration')
+    ->setParameter('duration', $duration)
+    ->orderBy('c.dateCreated', 'DESC')
+    ->setMaxResults(5);
+return $queryBuilder->getQuery()->getResult();</code></pre>
+            </div>
+        </section>
+
+        <section id="etape10" class="section">
+            <div class="section-header">
+                <span class="step-number">10</span>
+                <h2>Résumé des formulaires</h2>
+            </div>
+
+            <div class="card">
+                <h3>📋 Processus d'affichage d'un formulaire</h3>
+                <ul>
+                    <li><strong>Définir la classe</strong></li>
+                    <li><strong>Dans un controller :</strong>
+                        <ul class="nested-list">
+                            <li>Créer une instance d'entité</li>
+                            <li>Créer une instance de formulaire</li>
+                            <li>Passer le formulaire à Twig</li>
+                        </ul>
+                    </li>
+                    <li><strong>Déclencher l'affichage dans Twig</strong></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>🏷️ Liste des champs courants</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">Text, TextArea, Email, Password, Integer, Search, Tel, Choice, Entity, Date, File</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>⚙️ Options communes et essentielles</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">label, attr, required</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎮 Utilisation d'un formulaire dans le controller</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">class ProductController extends AbstractController
+{
+    /**
+     * @Route("/produit/nouveau", name="product_create")
+     */
+    public function create(): Response
+    {
+        $product = new Product();
+        $productForm = $this->createForm(ProductType::class, $product);
+        return $this->render("product/create.html.twig", [
+            "productForm" => $productForm-&gt;createView()
+        ]);
+    }</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Affichage d'un formulaire sous Twig</h3>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;div&gt;
+    &lt;h2&gt;Ajouter un produit&lt;/h2&gt;
+
+    {# affichage en état de décomposition avancée #}
+    {{ form_start(productForm) }}
+
+    &lt;div class="group"&gt;
+        {{ form_label(productForm.name) }}
+        {{ form_widget(productForm.name) }}
+        {{ form_errors(productForm.name) }}
+    &lt;/div&gt;
+
+    &lt;div class="group"&gt;
+        {{ form_label(productForm.price) }}
+        {{ form_widget(productForm.price) }}
+        {{ form_errors(productForm.price) }}
+    &lt;/div&gt;
+
+    &lt;button&gt;Envoyer !&lt;/button&gt;
+    {{ form_end(productForm) }}
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Version alternative (décomposition maniaque, nouveau en SF5.2)</h3>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;div&gt;
+    &lt;h2&gt;Ajouter un produit&lt;/h2&gt;
+
+    {# décomposition maniaque, nouveau en SF5.2 #}
+    {{ form_start(productForm) }}
+
+    &lt;div class="group"&gt;
+        &lt;label for="{{ field_name(productForm.name) }}"&gt;Nom du produit&lt;/label&gt;
+        &lt;input type="text"
+            id="{{ field_name(productForm.name) }}"
+            name="{{ field_name(productForm.name) }}"
+            value="{{ field_value(productForm.name) }}"
+            placeholder="{{ field_label(productForm.name) }}"
+            class="form-control"
+        &gt;
+
+        {% for error in field_errors(productForm.name) %}
+            &lt;div class="error"&gt;{{ error }}&lt;/div&gt;
+        {% endfor %}
+    &lt;/div&gt;
+
+    {# ... #}
+
+    &lt;button&gt;Envoyer !&lt;/button&gt;
+    {{ form_end(productForm) }}
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="etape11" class="section">
+            <div class="section-header">
+                <span class="step-number">11</span>
+                <h2>Création de formulaire</h2>
+            </div>
+
+            <div class="card">
+                <h3>📝 Étape 1 : Créer une classe de formulaire</h3>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">php bin/console make:form</code></pre>
+                <ul>
+                    <li>Indiquer le nom "CourseType" (Nom suivi de Type)</li>
+                    <li>Lier à l'entité correspondante, ici "Course"</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>🏗️ Étape 2 : Instancier le formulaire avec données vides</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">$course = new Course();
+$form = $this->createForm(CourseType::class, $course);</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>� Exemple complet - Méthode create</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/create', name: 'create', methods: ['GET', 'POST'])]
+public function create(Request $request): Response
+{
+    // Step 1 : Instancier le formulaire avec des données vides
+    // Param 1 : Quel est le formulaire
+    // Param 2 : la donnée par defaut dans le formulaire
+    $course = new Course();
+    $form = $this->createForm(CourseType::class, $course);
+
+    return $this->render('course/create.html.twig');
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📤 Envoyer le formulaire dans une vue</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">//Attention, on note bien que le formulaire est envoyé dans le front
+return $this->render('course/create.html.twig', [
+    'courseForm' => $form-&gt;createView()
+]);</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🏁 Exemple complet avec envoi</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/create', name: 'create', methods: ['GET', 'POST'])]
+public function create(Request $request): Response
+{
+    $course = new Course();
+    $form = $this->createForm(CourseType::class, $course);
+
+    return $this->render('course/create.html.twig', [
+        'courseForm' => $form-&gt;createView()
+    ]);
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="etape12" class="section">
+            <div class="section-header">
+                <span class="step-number">12</span>
+                <h2>Affichage et rendu</h2>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Affichage simple du formulaire dans Twig</h3>
+                <pre><span class="code-label">Twig</span><code class="language-twig">{% block body %}
+    &lt;h1&gt;Créer un cours&lt;/h1&gt;
+
+    {#  Afficher le formulaire couseForm #}
+    {{ form(courseForm) }}
+
+{% endblock %}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>⚠️ Rendu détaillé (à ne pas faire)</h3>
+                <pre><span class="code-label">Twig</span><code class="language-twig">{{ form_start(courseForm) }}
+
+    &lt;div class="uk-margin"&gt;
+        &lt;label for="{{ field_name(courseForm.name) }}"&gt;Nom du cours&lt;/label&gt;
+        &lt;input type="text"
+            id="{{ field_name(courseForm.name) }}"
+            name="{{ field_name(courseForm.name) }}"
+            value="{{ field_value(courseForm.name) }}"
+            placeholder="{{ field_label(courseForm.name) }}"
+            class="uk-input" aria-label="Input"
+        &gt;
+    &lt;/div&gt;
+
+{{ form_end(courseForm) }}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>✅ Préférer surcharger le formulaire</h3>
+                
+                <h4>📄 Section 1 : Fichier template</h4>
+                <p>Il nous faut un fichier pour surcharger la manière de générer les formulaires partout.</p>
+                <pre class="terminal"><span class="code-label terminal">Fichier</span><code>/templates/form/uikit_form_div_layout.html.twig</code></pre>
+                
+                <div class="note warning">
+                    <strong>⚠️ Important :</strong> Se baser sur le fichier natif (form_div_layout.html.twig)
+                </div>
+                <div class="url-box download-link">
+                    <span class="download-icon">📥</span>
+                    <a href="https://github.com/symfony/symfony/blob/6.4/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig" target="_blank" rel="noopener">
+                        https://github.com/symfony/symfony/blob/6.4/src/Symfony/Bridge/Twig/Resources/views/Form/form_div_layout.html.twig
+                    </a>
+                </div>
+                <p>Télécharger ce fichier, le renommer, et le copier dans "templates/form". Globalement, on remplace ou ajoute des classes CSS en cherchant les bons champs.</p>
+            </div>
+
+            <div class="card">
+                <h4>⚙️ Section 2 : config/packages/twig.yaml</h4>
+                <p>Ajouter le fichier template du formulaire customisé dans le fichier :</p>
+                <pre class="terminal"><span class="code-label terminal">Fichier</span><code>config/packages/twig.yaml</code></pre>
+                <pre><span class="code-label">YAML</span><code class="language-yaml">twig:
+    ...
+    form_themes: ['form/uikit_form_div_layout.html.twig']</code></pre>
+                <div class="note warning">
+                    <strong>⚠️ Important :</strong> Le chemin commence à partir du dossier templates, puisque c'est un fichier Twig.
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>🎨 Section 3 : Améliorer l'affichage</h4>
+                <p>Ajouter dans "base.html.twig" dans la balise "main", pour centrer le formulaire :</p>
+                <pre><span class="code-label">HTML</span><code class="language-html">class="uk-container"</code></pre>
+                
+                <p>Et garder juste dans le fichier ".html.twig" :</p>
+                <pre><span class="code-label">Twig</span><code class="language-twig">{% block body %}
+    &lt;h1&gt;Créer un cours&lt;/h1&gt;
+
+    {#  Afficher le dormulaire couseForm #}
+    {{ form(courseForm) }}
+
+{% endblock %}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔘 Ajouter un bouton submit</h3>
+                <pre><span class="code-label">HTML</span><code class="language-html">&lt;button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"&gt;Envoyer&lt;/button&gt;</code></pre>
+                
+                <p>Cela pose un problème car le bouton ne fait pas partie du formulaire. Donc inclure le bouton dans le formulaire :</p>
+                <pre><span class="code-label">Twig</span><code class="language-twig">{% block body %}
+    &lt;h1&gt;Créer un cours&lt;/h1&gt;
+
+    {#  Afficher le dormulaire couseForm #}
+
+    {# Ouvrir le formulaire #}
+    {{ form_start(courseForm) }}
+
+        {# Afficher tous les champs #}
+        {{ form_widget(courseForm) }}
+
+        {# Ajout du bouton #}
+        &lt;button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"&gt;Envoyer&lt;/button&gt;
+
+    {# Fermer le formulaire #}
+    {{ form_end(courseForm) }}
+
+{% endblock %}</code></pre>
+            </div>
+        </section>
+
+        <section id="etape13" class="section">
+            <div class="section-header">
+                <span class="step-number">13</span>
+                <h2>Traitement des données</h2>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Modification du controller pour récupérer les informations saisies</h3>
+                
+                <h4>📥 Injecter les request dans la méthode :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">(Request $request)</code></pre>
+                
+                <h4>⚙️ Traitement de base :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">$form-&gt;handleRequest($request);
+
+if ($form-&gt;isSubmitted() && $form-&gt;isValid()) {
+    return $this-&gt;redirectToRoute('wish_list');
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📝 Exemple complet avec traitement</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/create', name: 'create', methods: ['GET', 'POST'])]
+public function create(Request $request): Response
+{
+    // Step 1 : Instancier le formualire avec données vides
+    // Param 1 : Quel est le formualaire
+    // Param 2 : la donnée par defaut dans le formulaire
+    $course = new Course();
+
+    // Attention, on envoie l'adresse mémoire de $course
+    // Cela veut dire que l'objet lié au formulaire dans la memoire de la machine
+    $form = $this-&gt;createForm(CourseType::class, $course);
+
+    // PS : ca injecte les données du formulaire saisi dan l'adresse mémoire
+    // de course, remplir l'objet course avec les données saisies
+    // ATTENTION : SI ON A SAISI ET SUBMIT
+    //je récupère les données si saisies
+    $form-&gt;handleRequest($request);
+
+    // pour savoir si il y a eu un submit
+    if ($form-&gt;isSubmitted()) {
+        // faire quelque chose avec les données
+        dump("Je suis dans le submit");
+        return $this-&gt;redirectToRoute('main_home');
+    }
+
+    //Attention, on note bien que le formulaire est envoyé dans le front
+    return $this-&gt;render('course/create.html.twig', [
+        dump("Je ne suis pas dans le submit"),
+        'courseForm' => $form-&gt;createView()
+    ]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>✅ Validation du formulaire</h3>
+                
+                <h4>🔍 Ajouter "isValid()" dans le controller :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">// pour savoir si il y a eu un submit
+if ($form-&gt;isSubmitted() && $form-&gt;isValid()) {
+    // faire quelque chose avec les données
+    dump("Je suis dans le submit");
+    return $this-&gt;redirectToRoute('main_home');
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🛡️ Modifier l'entité pour ajouter des contraintes de validation</h3>
+                
+                <h4>📥 Ajouter dans les imports :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">use Symfony\Component\Validator\Constraints as Assert;</code></pre>
+                
+                <h4>🏷️ Puis modifier un attribut ($name dans l'exemple) avec un "Assert" :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Assert\Length(min: 6, max: 255)]
+#[ORM\Column(length: 255)]
+private ?string $name = null;</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📅 Modifier des champs dans le controller</h3>
+                <p>Champs qui ne seront pas affichés dans le formulaire (ici date de création et date de modification)</p>
+                
+                <h4>💾 Injecter d'abord "EntityManagerInterface $em" dans les paramètres du controller "create", puis :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">// pour savoir si il y a eu un submit
+if ($form-&gt;isSubmitted() && $form-&gt;isValid()) {
+
+    // TODO : Insérer l'objet dans la base de donnéees
+    //Prévenir qu'on manipule l'objet Course dans la BDD/ORM
+    $em-&gt;persist($course);
+
+    // TODO : Date de création/modification
+
+    // Envoyer dans la BDD
+    $em-&gt;flush();
+
+    // TODO : Rediriger sur une page avec message succès
+
+    //	return $this-&gt;redirectToRoute('main_home');
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Modifier le fichier "CourseType"</h3>
+                <p>Enlever "dateCreated" et "dateModified" de l'affichage front :</p>
+                
+                <h4>❌ On passe de :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function buildForm(FormBuilderInterface $builder, array $options): void
+{
+    $builder
+        -&gt;add('name')
+        -&gt;add('content')
+        -&gt;add('duration')
+        -&gt;add('published')
+        -&gt;add('dateCreated', null, [
+            'widget' =&gt; 'single_text',
+        ])
+        -&gt;add('dateModified', null, [
+            'widget' =&gt; 'single_text',
+        ])
+    ;
+}</code></pre>
+                
+                <h4>✅ À :</h4>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function buildForm(FormBuilderInterface $builder, array $options): void
+{
+    $builder
+        -&gt;add('name')
+        -&gt;add('content')
+        -&gt;add('duration')
+        -&gt;add('published')
+    ;
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📅 Gestion des dates</h3>
+                <p>Puis enlever dans la méthode "Demo" du controller :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">$course-&gt;setDateCreated(new \DateTimeImmutable("now"));</code></pre>
+                
+                <p>Et la déplacer dans la méthode "Create" :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">// pour savoir si il y a eu un submit
+if ($form-&gt;isSubmitted() && $form-&gt;isValid()) {
+
+    // TODO : Insérer l'objet dans la base de donnéees
+
+    // TODO : Date de création/modification
+    $course-&gt;setDateCreated(new \DateTimeImmutable("now"));
+
+    //Prévenir qu'on manipule l'objet Course dans la BDD/ORM
+    $em-&gt;persist($course);
+
+    // Envoyer dans la BDD
+    $em-&gt;flush();
+
+    // TODO : Rediriger sur une page avec message succès
+
+    //return $this-&gt;redirectToRoute('main_home');
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="etape14" class="section">
+            <div class="section-header">
+                <span class="step-number">14</span>
+                <h2>Validation & messages</h2>
+            </div>
+
+            <div class="card">
+                <h3>📨 Étape 1 : Envoyer un message de succès et rediriger</h3>
+                <p>Le message temporaire reste en mémoire pendant 2 redirections</p>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Préparer l'affichage du message dans base.html.twig</h3>
+                
+                <h4>📋 À récupérer sur le site uikit :</h4>
+                <pre><span class="code-label">HTML</span><code class="language-html">&lt;div class="uk-alert-success" uk-alert&gt;
+    &lt;a href class="uk-alert-close" uk-close&gt;&lt;/a&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                
+                <h4>📝 Puis coller le code dans base.html.twig :</h4>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;main class="uk-container"&gt;
+    &lt;div class="uk-alert-success" uk-alert&gt;
+        &lt;a href class="uk-alert-close" uk-close&gt;&lt;/a&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.&lt;/p&gt;
+    &lt;/div&gt;
+    {% block body %}{% endblock %}
+&lt;/main&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Préparer le design dynamique du futur message</h3>
+                <p>Préparer le design, tester le css, puis afficher le design dynamique du futur message :</p>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;main class="uk-container"&gt;
+    {#  Pour chaque type de message temporaire (ex: [success, [messages]] #}
+    {% for label, messages in app.flashes %}
+        {#  Pour chaque message j'affiche une alert. ex: [Virement effectué, Connecté] #}
+
+        {% for message in messages %}
+        &lt;div class="uk-alert-{{ label }}" uk-alert&gt;
+            &lt;a href class="uk-alert-close" uk-close&gt;&lt;/a&gt;
+            &lt;p&gt;{{ message }}&lt;/p&gt;
+        &lt;/div&gt;
+        {% endfor %}
+
+    {% endfor %}
+    {% block body %}{% endblock %}
+&lt;/main&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📤 Préparer le message dans le controller</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">// TODO : Rediriger sur une page avec message succès
+// Envoyer un message de succès
+$this-&gt;addFlash("success", "Le cours a été enregistré avec succès ! ");
+// Rediriger sur l'accueil
+return $this-&gt;redirectToRoute('main_home');</code></pre>
+            </div>
+        </section>
+
+        <section id="etape15" class="section">
+            <div class="section-header">
+                <span class="step-number">15</span>
+                <h2>Introduction aux relations</h2>
+            </div>
+
+            <div class="card">
+                <h3>🔗 Types de relations</h3>
+                <ul>
+                    <li><strong>Relation OneToOne</strong></li>
+                    <li><strong>Relation OneToMany / ManyToOne</strong></li>
+                    <li><strong>Relation ManyToMany</strong></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>📋 Les relations avec Doctrine</h3>
+                <ul>
+                    <li>Travailler avec les objets</li>
+                    <li>Jamais avec les id !</li>
+                    <li><strong>Les étapes :</strong>
+                        <ul class="nested-list">
+                            <li>Créer d'abord les 2 entités à associer (sans relation) avec "make:entity"</li>
+                            <li>Ajouter maintenant les relations, encore avec "make:entity"</li>
+                            <li>Suivre le wizard</li>
+                            <li>Mettre à jour la base de données</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="etape16" class="section">
+            <div class="section-header">
+                <span class="step-number">16</span>
+                <h2>Créer l'entité à lier</h2>
+            </div>
+
+            <div class="card">
+                <h3>🏗️ Créer l'entité "Category"</h3>
+                <p>Un cours à une catégorie, donc créer l'entité "Category" (id, name) :</p>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:entity</code></pre>
+                <ul>
+                    <li>Entrer le nom de l'entité (penser à la majuscule) : "Category"</li>
+                    <li>Répondre : "non"</li>
+                    <li>Ajouter une propriété : "name"</li>
+                    <li>Indiquer le type du champ : "string"</li>
+                    <li>Indiquer la longueur du champ : "255"</li>
+                    <li>Indiquer la nullité du champ</li>
+                </ul>
+                <div class="note warning">
+                    <strong>⚠️ Important :</strong> Ne pas créer le champ "id" !
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Créer un schéma de migration</h3>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:migration</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>⚠️ En cas d'erreur de migration</h3>
+                <ul>
+                    <li>Supprimer la BDD : Aller dans PhpMyAdmin/Opérations/Supprimer la base de données</li>
+                    <li>Recréer la base (utf8mb4_general_ci) vide</li>
+                    <li>Vérifier le dernier fichier de migration dans son projet voir s'il la requête est cohérente</li>
+                    <li>Refaire la migration :
+                        <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console d:m:m</code></pre>
+                    </li>
+                </ul>
+                
+                <p>Ensuite, si vous devez créer des migrations, faites-le après avoir corrigé la base.</p>
+                
+                <h4>🔍 S'il manque des tables/colonnes :</h4>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:migration</code></pre>
+                <p>Relancer la migration :</p>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console d:m:m</code></pre>
+                
+                <div class="note warning">
+                    <strong>⚠️ Note :</strong> Si la commande "make:migration" ne fonctionne pas, recommencer la procédure d'erreur de migration! Parfois, il faut supprimer vos fichiers de migration récemment créés s'ils sont corrompus. Cependant, il est important d'avoir une bonne connaissance de Doctrine pour déterminer si un fichier de migration est réellement corrompu.
+                </div>
+            </div>
+        </section>
+
+        <section id="etape17" class="section">
+            <div class="section-header">
+                <span class="step-number">17</span>
+                <h2>Configuration des relations</h2>
+            </div>
+
+            <div class="card">
+                <h3>🔗 Relancer make:entity sur la table existante</h3>
+                <p>Relancer un "make:entity" sur la table existante à lier, ici "Course" :</p>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:entity</code></pre>
+                <ul>
+                    <li>Entrer le nom de l'entité : "Course" (déjà existante)</li>
+                    <li>Entrer le nouveau champ : "category" (Entité créée précédemment)</li>
+                    <li>Entrer le type : "relation"</li>
+                    <li>Avec quelle classe relier : "Category"</li>
+                    <li>Choisir le type de relation : "ManyToOne"</li>
+                    <li>Nullable ? : "oui"</li>
+                    <li>Bidirection (pour les Getters) : "oui"</li>
+                    <li>Choix de changement du nom du champ : pas de changement</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>💾 Finaliser la configuration</h3>
+                <p>Les entités "Course" & "Category" sont bien modifiées</p>
+                
+                <h4>📝 Créer le fichier de migration qui va ajouter les clés étrangères dans la BDD :</h4>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console make:migration</code></pre>
+                
+                <h4>🚀 L'envoyer à la base :</h4>
+                <pre class="terminal"><span class="code-label terminal">Terminal</span><code class="language-bash">symfony console d:m:m</code></pre>
+            </div>
+        </section>
+
+        <section id="etape18" class="section">
+            <div class="section-header">
+                <span class="step-number">18</span>
+                <h2>Utilisation des relations</h2>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Modifier le fichier "CourseType"</h3>
+                <p>Enlever le champ "Published" inutile dans le front :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function buildForm(FormBuilderInterface $builder, array $options): void
+{
+    $builder
+        -&gt;add('name')
+        -&gt;add('content')
+        -&gt;add('duration')
+    ;
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔗 Ajouter un champ de type entité</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function buildForm(FormBuilderInterface $builder, array $options): void
+{
+    $builder
+        -&gt;add('name')
+        -&gt;add('content')
+        -&gt;add('duration')
+        -&gt;add('category', EntityType::class, [
+            'class' =&gt; Category::class,
+        ])
+    ;
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📋 Générer des catégories de test</h3>
+                <p>Ajouter dans la table "category" de la base, une liste de catégories, par exemple générée par :</p>
+                <div class="success-box url-box">
+                    <span class="link-icon">🔗</span>
+                    <a href="https://www.mockaroo.com/" target="_blank" rel="noopener">
+                        https://www.mockaroo.com/
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🏷️ Préciser quel champ afficher dans le select</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function buildForm(FormBuilderInterface $builder, array $options): void
+{
+    $builder
+        -&gt;add('name')
+        -&gt;add('content')
+        -&gt;add('duration')
+        -&gt;add('category', EntityType::class, [
+            'class' =&gt; Category::class,
+            'choice_label' =&gt; 'name', // Quel champ de category afficher dans le &lt;select&gt;&lt;option&gt;
+        ])
+    ;
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎨 Ajouter du CSS sur le "select"</h3>
+                <p>Rechercher dans le fichier "uikit_form_div_layout.html.twig" le "select" et ajouter la classe "uk-select" (ligne 62) :</p>
+                <pre><span class="code-label">HTML</span><code class="language-html">&lt;select class="uk-select" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>✅ Ajouter une valeur par défaut au champ "Published"</h3>
+                <p>Aller dans le controller "CourseController" pour ajouter une valeur par défaut au champ "Published" (vu qu'on l'a enlevé du front) pour ajouter "true" à ce champ lors du push à la BDD :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">$course-&gt;setPublished(true);</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📝 Exemple complet</h3>
+                <pre><span class="code-label">PHP</span><code class="language-php">if ($form-&gt;isSubmitted() && $form-&gt;isValid()) {
+
+    // TODO : Date de création/modification & Published
+    $course-&gt;setPublished(true);
+    $course-&gt;setDateCreated(new \DateTimeImmutable("now"));
+
+    // TODO : Insérer l'objet dans la base de donnéees
+    //Prévenir qu'on manipule l'objet Course dans la BDD/ORM
+    $em-&gt;persist($course);
+
+    // Envoyer dans la BDD
+    $em-&gt;flush();
+
+    // TODO : Rediriger sur une page avec message succès
+    // Envoyer un message de succès
+    $this-&gt;addFlash("success", "Le cours a été enregistré avec succès ! ");
+    // Rediriger sur l'accueil
+    return $this-&gt;redirectToRoute('main_home');
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📋 Afficher la catégorie dans la liste des cours</h3>
+                <p>Dans la liste des cours, on peut afficher la catégorie associée au cours récemment enregistré :</p>
+                
+                <h4>📝 Aller dans "list.html.twig"</h4>
+                <p>Dans le "thead" :</p>
+                <pre><span class="code-label">HTML</span><code class="language-html">&lt;th scope ="col"&gt;Catégorie&lt;/th&gt;</code></pre>
+                
+                <p>Dans le "for" :</p>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;td&gt;{{ c.category.name }}&lt;/td&gt;</code></pre>
+                
+                <p>Faire une ternaire (un "if" sur une seule ligne) si un cours n'a pas de catégorie :</p>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;td&gt;{{ c.category ? c.category.name : 'Aucune catégorie' }}&lt;/td&gt;</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📄 Résultat final</h3>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;table&gt;
+    &lt;thead&gt;
+        &lt;th scope ="col"&gt;Titre&lt;/th&gt;
+        &lt;th scope ="col"&gt;Durée&lt;/th&gt;
+        &lt;th scope ="col"&gt;Date de création&lt;/th&gt;
+        &lt;th scope ="col"&gt;Publié&lt;/th&gt;
+        &lt;th scope ="col"&gt;Catégorie&lt;/th&gt;
+        &lt;th scope ="col"&gt;Action&lt;/th&gt;
+    &lt;/thead&gt;
+
+    &lt;tbody&gt;
+        {% for c in courses %}
+            &lt;tr&gt;
+                &lt;td&gt;{{ c.name }}&lt;/td&gt;
+                &lt;td&gt;{{ c.duration }}&lt;/td&gt;
+                &lt;td&gt;{{ c.dateCreated | date('d/m/Y')}}&lt;/td&gt;
+                &lt;td&gt;{{ c.published ? 'X' : ''}}&lt;/td&gt;
+                &lt;td&gt;{{ c.category ? c.category.name : 'Aucune catégorie' }}&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;a href="{{ path('course_show', {'id': c.id}) }}"&gt;
+                        Détail
+                    &lt;/a&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        {% endfor %}
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="etape19" class="section">
+            <div class="section-header">
+                <span class="step-number">19</span>
+                <h2>Introduction à la sécurité</h2>
+            </div>
+            
+            <div class="card">
+                <h3>🔐 Concepts de base</h3>
+                <p>Comprendre les concepts d'authentification et d'autorisation selon Symfony :</p>
+                <div class="nested-list">
+                    <ul>
+                        <li><strong>Authentification :</strong> Qui est l'utilisateur ?</li>
+                        <li><strong>Autorisation :</strong> Que peut faire cet utilisateur ?</li>
+                        <li><strong>Flexibilité :</strong> Système très souple mais complexe</li>
+                        <li><strong>Automatisation :</strong> Plusieurs commandes "make" disponibles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📋 Étapes pour créer un système d'authentification</h3>
+                <div class="nested-list">
+                    <ol>
+                        <li><strong>Créer l'entité utilisateur</strong>
+                            <pre><span class="code-label">Terminal</span><code class="language-bash">php bin/console make:user</code></pre>
+                        </li>
+                        <li><strong>Créer le système d'authentification</strong>
+                            <pre><span class="code-label">Terminal</span><code class="language-bash">php bin/console make:auth</code></pre>
+                        </li>
+                        <li><strong>Créer le formulaire d'inscription</strong>
+                            <pre><span class="code-label">Terminal</span><code class="language-bash">php bin/console make:registration-form</code></pre>
+                        </li>
+                        <li><strong>Autres fonctionnalités :</strong>
+                            <ul>
+                                <li>Configurer la fonction "se souvenir de moi"</li>
+                                <li>Système d'oubli de mot de passe</li>
+                                <li>Lien de connexion magique</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>⚠️ Bonnes pratiques de sécurité</h3>
+                <div class="nested-list">
+                    <p><strong>❌ Ne jamais faire :</strong></p>
+                    <ul>
+                        <li>Validation dans le formulaire de connexion (bloque les anciens utilisateurs)</li>
+                        <li>Messages d'erreur trop précis ("l'email existe mais pas le mot de passe")</li>
+                        <li>Donner des indices aux hackers</li>
+                    </ul>
+                    
+                    <p><strong>✅ À faire :</strong></p>
+                    <ul>
+                        <li>Message générique : "Le couple email/mot de passe est incorrect"</li>
+                        <li>Reset mot de passe : ne pas dire que le mail existe</li>
+                        <li>Tester la sécurité : "Le meilleur moyen de tester son site est de se hacker soi-même"</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="etape20" class="section">
+            <div class="section-header">
+                <span class="step-number">20</span>
+                <h2>L'entité utilisateur</h2>
+            </div>
+            
+            <div class="card">
+                <h3>👤 Création de l'entité User</h3>
+                <pre><span class="code-label">Terminal</span><code class="language-bash">symfony console make:user</code></pre>
+                
+                <div class="nested-list">
+                    <p><strong>� Configuration :</strong></p>
+                    <ul>
+                        <li><strong>Nom de l'entité :</strong> "User"</li>
+                        <li><strong>Enregistrer dans la base :</strong> "oui"</li>
+                        <li><strong>Attribut affiché :</strong> "username"</li>
+                        <li><strong>Hasher le password :</strong> "oui"</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="etape21" class="section">
+            <div class="section-header">
+                <span class="step-number">21</span>
+                <h2>Système d'authentification</h2>
+            </div>
+            
+            <div class="card">
+                <h3>🔑 Génération de l'authentificateur</h3>
+                <div class="note">
+                    <strong>⚠️ Déprécié :</strong> Cette commande est dépréciée dans les versions récentes de Symfony
+                </div>
+                <pre><span class="code-label">Terminal</span><code class="language-bash">symfony console make:auth</code></pre>
+                
+                <div class="nested-list">
+                    <p><strong>🔧 Configuration :</strong></p>
+                    <ul>
+                        <li><strong>Formulaire de login :</strong> "1"</li>
+                        <li><strong>Nom de la classe :</strong> "AppEniAuthenticator"</li>
+                        <li><strong>Nom du controller :</strong> "SecurityController"</li>
+                        <li><strong>URL de Logout :</strong> "Oui"</li>
+                        <li><strong>Remember me :</strong> "Oui"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📁 Fichiers créés</h3>
+                <div class="nested-list">
+                    <p><strong>Nouveaux fichiers :</strong></p>
+                    <ul>
+                        <li><code>src/Security/AppEniAuthenticator.php</code></li>
+                        <li><code>src/Controller/SecurityController.php</code></li>
+                        <li><code>templates/security/login.html.twig</code></li>
+                    </ul>
+                    
+                    <p><strong>Fichier modifié :</strong></p>
+                    <ul>
+                        <li><code>config/packages/security.yaml</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🗃️ Mise à jour de la base de données</h3>
+                <p>Vérifier la synchronisation avec la base :</p>
+                <pre><span class="code-label">Terminal</span><code class="language-bash">symfony console d:m:m</code></pre>
+                
+                <p>Créer une migration :</p>
+                <pre><span class="code-label">Terminal</span><code class="language-bash">symfony console make:migration</code></pre>
+                
+                <p>Exécuter la migration :</p>
+                <pre><span class="code-label">Terminal</span><code class="language-bash">symfony console d:m:m</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>👤 Créer un utilisateur de test</h3>
+                <p>Ajouter dans les fixtures, après le <code>$manager->flush();</code> :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">// USER PAR DEFAUT
+$user = new User();
+$user->setUsername("velocipastor");
+
+// générer un mot de passe hashé
+$hashedPassword = $this->passwordHasher->hashPassword($user, "123");
+$user->setPassword($hashedPassword);
+
+$manager->persist($user);
+$manager->flush();</code></pre>
+                
+                <p>Ajouter le constructeur dans la classe Fixtures :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function __construct(private UserPasswordHasherInterface $passwordHasher)
+{
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔄 Charger les fixtures</h3>
+                <pre><span class="code-label">Terminal</span><code class="language-bash">symfony console d:f:l</code></pre>
+                <p>Répondre "oui" pour purger la BDD</p>
+                
+                <div class="nested-list">
+                    <p><strong>🌐 Routes par défaut :</strong></p>
+                    <ul>
+                        <li><strong>Connexion :</strong> 
+                            <div class="success-box">
+                                <div class="url-box">
+                                    <span class="link-icon">🔗</span>
+                                    <a href="http://localhost/mon-site/login" target="_blank" rel="noopener">
+                                        http://localhost/mon-site/login
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><strong>Déconnexion :</strong>
+                            <div class="success-box">
+                                <div class="url-box">
+                                    <span class="link-icon">🔗</span>
+                                    <a href="http://localhost/mon-site/logout" target="_blank" rel="noopener">
+                                        http://localhost/mon-site/logout
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <p><strong>🔑 Identifiants de test :</strong></p>
+                    <ul>
+                        <li><strong>Login :</strong> "velocipastor"</li>
+                        <li><strong>Mot de passe :</strong> "123"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Configuration de la redirection</h3>
+                <p>Dans <code>Security/AppEniAuthenticator</code>, ligne 53, fonction <code>onAuthenticationSuccess</code> :</p>
+                
+                <p><strong>❌ Enlever l'exception :</strong></p>
+                <pre><span class="code-label">PHP</span><code class="language-php">throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);</code></pre>
+                
+                <p><strong>✅ Décommenter et configurer :</strong></p>
+                <pre><span class="code-label">PHP</span><code class="language-php">return new RedirectResponse($this->urlGenerator->generate('app_main'));</code></pre>
+                
+                <div class="note">
+                    <strong>💡 Conseil :</strong> Dans le SecurityController, vous pouvez bloquer l'accès à la page login pour les utilisateurs connectés en décommentant les lignes appropriées.
+                </div>
+            </div>
+        </section>
+
+        <section id="etape22" class="section">
+            <div class="section-header">
+                <span class="step-number">22</span>
+                <h2>Formulaire d'inscription</h2>
+            </div>
+            
+            <div class="card">
+                <h3>📝 Génération du formulaire d'inscription</h3>
+                <pre><span class="code-label">Terminal</span><code class="language-bash">symfony console make:registration-form</code></pre>
+                
+                <div class="nested-list">
+                    <p><strong>🔧 Configuration :</strong></p>
+                    <ul>
+                        <li><strong>Attribut de validation :</strong> "oui"</li>
+                        <li><strong>Envoi d'email :</strong> "non" (sauf si gestionnaire de mail installé)</li>
+                        <li><strong>Connecter après inscription :</strong> "oui"</li>
+                        <li><strong>Test unitaire :</strong> "non"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📁 Fichiers générés</h3>
+                <div class="nested-list">
+                    <p><strong>Nouveaux fichiers :</strong></p>
+                    <ul>
+                        <li><code>src/Form/RegistrationFormType.php</code></li>
+                        <li><code>src/Controller/RegistrationController.php</code></li>
+                        <li><code>templates/registration/register.html.twig</code></li>
+                    </ul>
+                    
+                    <p><strong>Fichier mis à jour :</strong></p>
+                    <ul>
+                        <li><code>src/Entity/User.php</code></li>
+                    </ul>
+                </div>
+                
+                <p>Le formulaire d'inscription est accessible via :</p>
+                <div class="success-box">
+                    <div class="url-box">
+                        <span class="link-icon">🔗</span>
+                        <a href="http://localhost/mon-site/register" target="_blank" rel="noopener">
+                            http://localhost/mon-site/register
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔗 Lien vers l'inscription</h3>
+                <p>Ajouter dans <code>login.html.twig</code> pour créer un lien vers l'inscription :</p>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;div class="uk-text-small uk-text-center"&gt;
+    Not registered? &lt;a href="{{ path('app_register') }}"&gt;Créer un compte&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="etape23" class="section">
+            <div class="section-header">
+                <span class="step-number">23</span>
+                <h2>Fonctionnalités bonus</h2>
+            </div>
+            
+            <div class="card">
+                <h3>👤 Préremplir un formulaire avec l'utilisateur connecté</h3>
+                <p>Dans <code>CourseType</code>, ajouter un constructeur :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function __construct(private Security $security) 
+{
+    $this->security = $security;
+}</code></pre>
+                
+                <p>Modifier la fonction <code>buildForm</code> pour ajouter l'auteur :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function buildForm(FormBuilderInterface $builder, array $options): void
+{
+    $builder
+        ->add('name')
+        ->add('author', EntityType::class, [
+            'label' => 'Auteur',
+            'class' => User::class,
+            'choice_label' => 'username',
+            'data' => $this->security->getUser(),
+            'disabled' => true, // Empêche la modification
+        ])
+        ->add('content')
+        ->add('duration')
+        ->add('category', EntityType::class, [
+            'class' => Category::class,
+            'choice_label' => 'name',
+        ])
+    ;
+}</code></pre>
+                
+                <div class="note">
+                    <strong>📌 N'oubliez pas :</strong> Importer l'entité User avec <code>use App\Entity\User;</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔒 Affichage conditionnel selon l'authentification</h3>
+                <p>Exemple dans la navbar pour afficher/cacher les liens selon l'état de connexion :</p>
+                <pre><span class="code-label">Twig</span><code class="language-twig">&lt;div class="uk-navbar-right"&gt;
+    &lt;ul class="uk-navbar-nav"&gt;
+        {% if app.user %}
+            &lt;!-- Utilisateur connecté --&gt;
+            &lt;div&gt;
+                Bonjour {{ app.user.userIdentifier }}, 
+                &lt;a href="{{ path('app_logout') }}"&gt;Se déconnecter&lt;/a&gt;
+            &lt;/div&gt;
+        {% else %}
+            &lt;!-- Utilisateur non connecté --&gt;
+            &lt;li class="uk-active"&gt;
+                &lt;a href="{{ path('app_register') }}"&gt;S'enregistrer&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li class="uk-active"&gt;
+                &lt;a href="{{ path('app_login') }}"&gt;Se connecter&lt;/a&gt;
+            &lt;/li&gt;
+        {% endif %}
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <section id="etape24" class="section">
+            <div class="section-header">
+                <span class="step-number">24</span>
+                <h2>Objectifs des services</h2>
+            </div>
+            
+            <div class="card">
+                <h3>🎯 Objectifs des services</h3>
+                <div class="nested-list">
+                    <ul>
+                        <li><strong>💡 Comprendre l'intérêt des services</strong></li>
+                        <li><strong>🏗️ Savoir créer ses propres services</strong></li>
+                        <li><strong>💉 Savoir utiliser l'injection de dépendances</strong></li>
+                        <li><strong>🔧 Connaître les services utiles de Symfony</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📚 Qu'est-ce qu'un service ?</h3>
+                <p>Un service est une classe PHP qui encapsule une logique métier spécifique. Il permet de :</p>
+                <div class="nested-list">
+                    <ul>
+                        <li><strong>Réutiliser du code</strong> entre différents controllers</li>
+                        <li><strong>Organiser la logique métier</strong> en dehors des controllers</li>
+                        <li><strong>Faciliter les tests</strong> et la maintenance</li>
+                        <li><strong>Respecter le principe de responsabilité unique</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="etape25" class="section">
+            <div class="section-header">
+                <span class="step-number">25</span>
+                <h2>Créer un service</h2>
+            </div>
+            
+            <div class="card">
+                <h3>📁 Structure et création</h3>
+                <p>Créer un dossier <code>Services</code> dans <code>src/</code></p>
+                <p>Créer une classe PHP dans ce dossier :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php"><?php
+
+namespace App\Service;
+
+use App\Repository\CourseRepository;
+
+class CourseService
+{
+    public function __construct(private CourseRepository $courseRepository) 
+    {
+    }
+    
+    public function getPublishedCourses(): array
+    {
+        $courses = $this->courseRepository->findBy(
+            ['published' => true], 
+            ['name' => 'DESC'], 
+            5
+        );
+        
+        return $courses;
+    }
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔧 Injection de dépendances</h3>
+                <div class="note">
+                    <strong>💡 Important :</strong> Dans les services, l'injection se fait obligatoirement par le constructeur, contrairement aux controllers où on peut injecter directement dans les méthodes.
+                </div>
+                
+                <p><strong>❌ Ne fonctionne pas dans un service :</strong></p>
+                <pre><span class="code-label">PHP</span><code class="language-php">// ❌ Injection directe dans la méthode (ne marche que dans les controllers)
+public function getPublishedCourses(CourseRepository $courseRepository): array
+{
+    return $courseRepository->findBy(['published' => true]);
+}</code></pre>
+                
+                <p><strong>✅ Injection correcte dans un service :</strong></p>
+                <pre><span class="code-label">PHP</span><code class="language-php">// ✅ Injection par le constructeur
+public function __construct(private CourseRepository $courseRepository) {}
+
+public function getPublishedCourses(): array
+{
+    return $this->courseRepository->findBy(['published' => true]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🎮 Utilisation dans le controller</h3>
+                <p>Injecter le service dans le controller :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">use App\Service\CourseService;
+
+#[Route('/courses', name: 'course_list')]
+public function list(CourseService $courseService): Response
+{
+    $courses = $courseService->getPublishedCourses();
+    
+    return $this->render('course/list.html.twig', [
+        'courses' => $courses
+    ]);
+}</code></pre>
+            </div>
+        </section>
+
+        <section id="etape26" class="section">
+            <div class="section-header">
+                <span class="step-number">26</span>
+                <h2>Créer une API</h2>
+            </div>
+            
+            <div class="card">
+                <h3>🌐 Qu'est-ce qu'une API ?</h3>
+                <p>Une API (Application Programming Interface) est une requête HTTP qui retourne des données, généralement en JSON, plutôt qu'une page HTML.</p>
+                
+                <div class="note">
+                    <strong>⚠️ Important :</strong> Une API retourne une <code>JsonResponse</code> et non une <code>Response</code> classique.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Version API (JSON)</h3>
+                <p>Route qui retourne les données en JSON :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/api/courses', name: 'api_course_list', methods: ['GET'])]
+public function listJSON(CourseService $courseService): JsonResponse
+{
+    $courses = $courseService->getPublishedCourses();
+    
+    return $this->json($courses);
+    // Équivalent à : return new JsonResponse($courses);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🖼️ Version HTML (classique)</h3>
+                <p>Route qui retourne une page HTML :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">#[Route('/courses', name: 'course_list', methods: ['GET'])]
+public function list(CourseService $courseService): Response
+{
+    $courses = $courseService->getPublishedCourses();
+    
+    return $this->render('course/list.html.twig', [
+        'courses' => $courses
+    ]);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🔄 Comparaison des deux approches</h3>
+                <div class="nested-list">
+                    <p><strong>🌐 API JSON :</strong></p>
+                    <ul>
+                        <li>Retourne des données brutes en JSON</li>
+                        <li>Utilisé par des applications mobiles, du JavaScript, etc.</li>
+                        <li>Plus léger et rapide</li>
+                        <li>Facilite l'intégration avec d'autres systèmes</li>
+                    </ul>
+                    
+                    <p><strong>🖼️ HTML :</strong></p>
+                    <ul>
+                        <li>Retourne une page web complète</li>
+                        <li>Destiné aux navigateurs web</li>
+                        <li>Inclut le CSS, JavaScript, etc.</li>
+                        <li>Interface utilisateur directement utilisable</li>
+                    </ul>
+                </div>
+                
+                <div class="note">
+                    <strong>💡 Conseil :</strong> Pensez à utiliser des noms de routes différents et évitez les références circulaires entre entités pour éviter les boucles infinies en JSON.
+                </div>
+            </div>
+        </section>
+
+        <section id="etape27" class="section">
+            <div class="section-header">
+                <span class="step-number">27</span>
+                <h2>Logs et logging</h2>
+            </div>
+            
+            <div class="card">
+                <h3>📝 Ajouter le logging</h3>
+                <p>Injecter le logger dans le constructeur du service :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">use Psr\Log\LoggerInterface;
+
+public function __construct(
+    private CourseRepository $courseRepository, 
+    private LoggerInterface $logger
+) {}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📊 Utilisation du logger</h3>
+                <p>Ajouter des logs dans vos méthodes :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">public function getPublishedCourses(): array
+{
+    $courses = $this->courseRepository->findBy(
+        ['published' => true], 
+        ['name' => 'DESC'], 
+        5
+    );
+    
+    // Logger l'action
+    $this->logger->info("La liste des cours publiés a été récupérée avec succès !");
+    
+    return $courses;
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>📋 Niveaux de log disponibles</h3>
+                <div class="nested-list">
+                    <ul>
+                        <li><strong>🔍 debug() :</strong> Informations de débogage détaillées</li>
+                        <li><strong>ℹ️ info() :</strong> Messages informatifs généraux</li>
+                        <li><strong>⚠️ warning() :</strong> Avertissements</li>
+                        <li><strong>❌ error() :</strong> Erreurs qui ne cassent pas l'application</li>
+                        <li><strong>� critical() :</strong> Erreurs critiques</li>
+                    </ul>
+                </div>
+                
+                <div class="note">
+                    <strong>📁 Logs :</strong> Les logs sont sauvegardés dans <code>var/log/</code> par défaut.
+                </div>
+            </div>
+        </section>
+
+        <section id="etape28" class="section">
+            <div class="section-header">
+                <span class="step-number">28</span>
+                <h2>Tests unitaires</h2>
+            </div>
+            
+            <div class="card">
+                <h3>🧪 Types de tests</h3>
+                <div class="nested-list">
+                    <ul>
+                        <li><strong>🔬 Test unitaire :</strong> Teste une méthode isolée (avec des mocks)</li>
+                        <li><strong>🏗️ Test fonctionnel :</strong> Teste une fonctionnalité complète</li>
+                        <li><strong>🛡️ Test de non-régression :</strong> Vérifie que les fonctionnalités ne sont pas cassées</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📝 Créer un test pour le service</h3>
+                <p>Créer une classe de test dans <code>Service/</code> nommée <code>CourseServiceTest</code> :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php"><?php
+
+namespace App\Tests\Service;
+
+use App\Service\CourseService;
+use PHPUnit\Framework\TestCase;
+
+class CourseServiceTest extends TestCase
+{
+    public function testGetPublishedCourses(): void
+    {
+        // Arrange (Préparer)
+        // TODO: Créer des mocks pour les dépendances
+        
+        // Act (Agir)
+        // TODO: Appeler la méthode à tester
+        
+        // Assert (Vérifier)
+        $this->assertEquals(true, true);
+    }
+    
+    public function testServiceReturnsArray(): void
+    {
+        // Test simple pour vérifier que le service retourne bien un tableau
+        $this->assertTrue(is_array([]));
+    }
+}</code></pre>
+                
+                <p>Exemple de test simple :</p>
+                <pre><span class="code-label">PHP</span><code class="language-php">//Un test pour tester que récupérer les cours publiés fonctionne
+public function testGetPublishedCourses() {
+    $this->assertEquals(true, true);
+}</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>🏃‍♂️ Exécuter les tests</h3>
+                <p>Lancer les tests depuis l'IDE ou en ligne de commande :</p>
+                <pre><span class="code-label">Terminal</span><code class="language-bash"># Lancer tous les tests
+php bin/phpunit
+
+# Lancer un test spécifique
+php bin/phpunit tests/Service/CourseServiceTest.php
+
+# Lancer avec plus de détails
+php bin/phpunit --verbose</code></pre>
+                
+                <div class="note">
+                    <strong>💡 Conseil :</strong> Dans PHPStorm, vous pouvez cliquer sur l'icône de test à côté de la classe ou méthode pour l'exécuter directement.
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>✅ Bonnes pratiques</h3>
+                <div class="nested-list">
+                    <ul>
+                        <li><strong>🏗️ Structure AAA :</strong> Arrange, Act, Assert</li>
+                        <li><strong>📝 Noms explicites :</strong> Le nom du test doit décrire ce qui est testé</li>
+                        <li><strong>🔄 Tests automatisés :</strong> Intégrer dans le processus de CI/CD</li>
+                        <li><strong>🎯 Un test = un concept :</strong> Tester une seule chose par test</li>
+                        <li><strong>🧹 Tests indépendants :</strong> Chaque test doit pouvoir s'exécuter seul</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="page-footer">
+            <p>�📚 Guide Symfony - Setup, Développement, Données, Formulaires, Relations, Sécurité & Services</p>
+            <p>Version 6.4.* • Documentation mise à jour</p>
+        </footer>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
